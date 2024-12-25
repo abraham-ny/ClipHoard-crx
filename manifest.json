@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "ClipHoard - Clipboard Hoarder",
+  "version": "1.0",
+  "offline_enabled": true,
+  "short_name": "ClipHoard",
+  "description": "Store clipboard text with timestamps for a longer time and search or delete entries.",
+  "permissions": [
+    "clipboardRead",
+    "storage",
+    "contextMenus",
+    "alarms"
+  ],
+  "background": {
+    "service_worker": "background.html",
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+
+}

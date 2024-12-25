@@ -1,0 +1,34 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipHoard service</title>
+    <script src="background.js"></script>
+</head>
+
+<body onload="loaded()">
+    <h1 id="main-text">Clipboard service</h1>
+</body>
+<script>
+    function loaded() {
+        document.addEventListener("paste", function (event) {
+            // Get the clipboard contents as plain text
+            var clipboardData = event.clipboardData || window.clipboardData;
+            var text = clipboardData.getData("text/plain");
+
+            // Do something with the pasted text
+            console.log("Pasted text: " + text);
+            chrome.storage.local.get({ clipboard: [] }, (data) => {
+                const clipboard = data.clipboard;
+                if (!clipboard.some((entry) => entry.text === text)) {
+                    clipboard.unshift({ text, timestamp: new Date().toISOString() });
+                    chrome.storage.local.set({ clipboard });
+                    console.log("Clipboard text saved:", text);
+                }
+            });
+        });
+    }
+</script>
+
+</html>
